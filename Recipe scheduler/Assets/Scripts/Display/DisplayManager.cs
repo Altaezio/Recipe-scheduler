@@ -15,6 +15,8 @@ public class DisplayManager : MonoBehaviour
     private GameObject recipeModifier;
     [SerializeField]
     private GameObject recipeViewer;
+    [SerializeField]
+    private GameObject optionViewer;
 
     private Stack<GameObject> stackView;
 
@@ -36,6 +38,7 @@ public class DisplayManager : MonoBehaviour
         recipesList.SetActive(false);
         recipeModifier.SetActive(false);
         recipeViewer.SetActive(false);
+        optionViewer.SetActive(false);
     }
 
     public void NewView(GameObject newView)

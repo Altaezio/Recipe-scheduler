@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5104455355790219731}
   - component: {fileID: 5636406903771993919}
   - component: {fileID: 4548200051551292456}
+  - component: {fileID: 7079662175030496613}
+  - component: {fileID: 5949704899702657947}
   m_Layer: 5
   m_Name: SuggestCourse
   m_TagString: Untagged
@@ -120,6 +122,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &7079662175030496613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618538941942047469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a942f30c2badf68418227650a0876276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suggestionsManager: {fileID: 5949704899702657947}
+  content: {fileID: 9222279461463486735}
+  nbMeal: {fileID: 9222279461443678440}
+  suggestionPrefab: {fileID: 1753014781710321422, guid: 5ebd44b6d36b27747b14931c9ebda46f, type: 3}
+--- !u!114 &5949704899702657947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618538941942047469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb944104b2cfe3a49add4fba11af79b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  course: 0
 --- !u!1 &9222279459740912779
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +459,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9222279460471989309}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5949704899702657947}
+        m_TargetAssemblyTypeName: SuggestionsManager, Assembly-CSharp
+        m_MethodName: SuggestRecipes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9222279461099196983
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +725,7 @@ GameObject:
   - component: {fileID: 9222279461443678441}
   - component: {fileID: 9222279461443678440}
   m_Layer: 5
-  m_Name: NumberDay
+  m_Name: NumberMeal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

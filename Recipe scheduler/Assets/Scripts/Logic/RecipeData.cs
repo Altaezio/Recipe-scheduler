@@ -35,6 +35,30 @@ public class RecipeData
         return this.name == name && this.author == author;
     }
 
+    public bool IsSameRecipe(RecipeData recipe)
+    {
+        return IsSameRecipe(recipe.Name, recipe.author);
+    }
+
+    public bool MatchRequirement(Dictionary<ESeason, bool> seasons)
+    {
+        foreach(KeyValuePair<ESeason, bool> season in seasons)
+        {
+            if (season.Value && !Seasons[season.Key]) return false;
+        }
+        return true;
+    }
+
+    public bool MatchRequirement(ECourse course)
+    {
+        return course == Course;
+    }
+
+    public bool MatchRequirement(Dictionary<ESeason, bool> seasons, ECourse course)
+    {
+        return MatchRequirement(seasons) && MatchRequirement(course);
+    }
+
     public void Modify(Dictionary<ESeason, bool> seasons = null, ECourse course = ECourse.Main, string recipeDetails = null)
     {
         this.seasons = seasons ?? this.seasons;
