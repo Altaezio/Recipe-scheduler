@@ -12,4 +12,6 @@ public class PlayerOptions : ScriptableObject
     public int nbDessert;
 
     public Dictionary<ESeason, bool> Seasons;
+
+    public string SaveDirectory;
 }

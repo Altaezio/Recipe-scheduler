@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class OptionManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class OptionManager : MonoBehaviour
     {
         playerOptions = options;
         playerOptions.Seasons = new Dictionary<ESeason, bool>();
+        if (playerOptions.SaveDirectory.Length == 0)
+            playerOptions.SaveDirectory = Application.persistentDataPath;
     }
 
     public void CheckWinter(bool value)
@@ -50,5 +53,16 @@ public class OptionManager : MonoBehaviour
     public void DefaultDessertValue(string value)
     {
         playerOptions.nbDessert = Int32.Parse(value);
+    }
+
+    public void ChangeDirectory(string path)
+    {
+        if (Directory.Exists(path))
+            playerOptions.SaveDirectory = path;
+    }
+
+    public void ResetDirectory()
+    {
+        ChangeDirectory(Application.persistentDataPath);
     }
 }
