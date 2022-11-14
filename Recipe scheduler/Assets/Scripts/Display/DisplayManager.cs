@@ -56,14 +56,14 @@ public class DisplayManager : MonoBehaviour
 
     public void GoToViewRecipe(RecipeData data)
     {
-        NewView(recipeViewer);
         currentRecipe = data;
+        NewView(recipeViewer);
     }
 
     public void GoToModifyRecipe(RecipeData data)
     {
-        NewView(recipeModifier);
         currentRecipe = data;
+        NewView(recipeModifier);
     }
 
     public void GoAddRecipe()

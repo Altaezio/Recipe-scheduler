@@ -37,16 +37,20 @@ public class RecipesManager : MonoBehaviour
     /// <param name="seasons">The seasons when you can cook this recipe</param>
     /// <param name="course">When to eat the recipe</param>
     /// <param name="recipeDetails">The details of the recipe</param>
-    public void ModifyRecipe(string name, string author, Dictionary<ESeason, bool> seasons = null, ECourse course = ECourse.Main, string recipeDetails = null)
+    /// <returns>True if everything went well</returns>
+    public bool ModifyRecipe(string name, string author, Dictionary<ESeason, bool> seasons = null, ECourse course = ECourse.Main, string recipeDetails = null)
     {
+        if (name.Length == 0 || author.Length == 0) return false;
+
         RecipeData recipeMatch = RecipeDatas.Find((data) => data.IsSameRecipe(name, author));
         if (recipeMatch is null)
         {
-            RecipeData newRecipe = new RecipeData(name, author, seasons, course, recipeDetails);
+            RecipeData newRecipe = new(name, author, seasons, course, recipeDetails);
             RecipeDatas.Add(newRecipe);
             OnAddRecipeData?.Invoke(newRecipe);
-            return;
+            return true;
         }
         recipeMatch.Modify(seasons, course, recipeDetails);
+        return true;
     }
 }

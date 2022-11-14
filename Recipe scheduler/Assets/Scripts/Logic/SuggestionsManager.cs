@@ -27,7 +27,7 @@ public class SuggestionsManager : MonoBehaviour
 
     public void LoadMatchingRecipes()
     {
-        matchingRecipes = RecipesManager.Instance.RecipeDatas.FindAll((recipe) => recipe.MatchRequirement(OptionManager.playerOptions.Seasons, course));
+        matchingRecipes = RecipesManager.Instance.RecipeDatas.FindAll((recipe) => recipe.MatchRequirement(OptionManager.playerOptions.Seasons, course) && recipe.IsUsed);
 
     }
 
@@ -52,9 +52,9 @@ public class SuggestionsManager : MonoBehaviour
     private RecipeData RerollSuggestion()
     {
         if (matchingRecipes.Count > Suggestions.Count)
-            return matchingRecipes.Find((recipe) => recipe.MatchRequirement(OptionManager.playerOptions.Seasons, course) && !Suggestions.Contains(recipe));
+            return matchingRecipes.Find((recipe) => recipe.MatchRequirement(OptionManager.playerOptions.Seasons, course) && !Suggestions.Contains(recipe) && recipe.IsUsed);
         else
-            return matchingRecipes.Find((recipe) => recipe.MatchRequirement(OptionManager.playerOptions.Seasons, course));
+            return matchingRecipes.Find((recipe) => recipe.MatchRequirement(OptionManager.playerOptions.Seasons, course) && recipe.IsUsed);
     }
 
     private RecipeData ReplaceSuggestion(RecipeData toReplace, RecipeData replaceWith)

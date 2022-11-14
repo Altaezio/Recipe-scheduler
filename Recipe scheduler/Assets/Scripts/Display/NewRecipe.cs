@@ -10,6 +10,8 @@ public class NewRecipe : MonoBehaviour
     private TMP_InputField inputName;
     [SerializeField]
     private TMP_InputField inputAuthor;
+    [SerializeField]
+    private GameObject popup, successCreatingRecipe, failCreatingRecipe;
 
     public string RecipeName { get; private set; }
     public string RecipeAuthor { get; private set; }
@@ -35,17 +37,22 @@ public class NewRecipe : MonoBehaviour
         {
             inputName.interactable = true;
             inputAuthor.interactable = true;
-            RecipeSeasons = new Dictionary<ESeason, bool>();
-            RecipeSeasons.Add(ESeason.Winter,false);
-            RecipeSeasons.Add(ESeason.Spring, false);
-            RecipeSeasons.Add(ESeason.Summer, false);
-            RecipeSeasons.Add(ESeason.Autumn, false);
+            RecipeSeasons = new Dictionary<ESeason, bool>
+            {
+                { ESeason.Winter, true },
+                { ESeason.Spring, true },
+                { ESeason.Summer, true },
+                { ESeason.Autumn, true }
+            };
         }
     }
 
     public void ModifyRecipe()
     {
-        RecipesManager.Instance.ModifyRecipe(RecipeName, RecipeAuthor, RecipeSeasons, (ECourse)RecipeCourse, RecipeDetails);
+        bool modificationResult = RecipesManager.Instance.ModifyRecipe(RecipeName, RecipeAuthor, RecipeSeasons, (ECourse)RecipeCourse, RecipeDetails);
+        popup.SetActive(true);
+        successCreatingRecipe.SetActive(modificationResult);
+        failCreatingRecipe.SetActive(!modificationResult);
     }
     public void CheckWinter(bool value)
     {

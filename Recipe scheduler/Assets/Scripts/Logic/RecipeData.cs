@@ -4,45 +4,39 @@ using UnityEngine;
 
 public class RecipeData
 {
-    // Data
-    private string name;
-    private string author;
-    private Dictionary<ESeason, bool> seasons;
-    private ECourse course;
-    private string recipeDetails;
-
-    // Logic
-    private bool inUse;
-
-    public string Name { get => name; private set { } }
-    public string Author { get => author; private set { } }
-    public Dictionary<ESeason, bool> Seasons { get => seasons; private set { } }
-    public ECourse Course { get => course; private set { } }
-    public string RecipeDetails { get => recipeDetails; private set { } }
-    public bool IsUsed { get => inUse; set => inUse = value; }
+    public string Name;
+    public string Author;
+    public Dictionary<ESeason, bool> Seasons;
+    public List<ESeason> choosenSeasons;
+    public ECourse Course;
+    public string RecipeDetails;
+    public bool IsUsed;
 
     public RecipeData(string name, string author, Dictionary<ESeason, bool> seasons = null, ECourse course = ECourse.Main, string recipeDetails = null)
     {
-        this.name = name;
-        this.author = author;
-        this.seasons = seasons ?? this.seasons;
-        this.course = course;
-        this.recipeDetails = recipeDetails ?? this.recipeDetails;
+        Name = name;
+        Author = author;
+        Seasons = seasons ?? new Dictionary<ESeason, bool>();
+        choosenSeasons=new List<ESeason>();
+        foreach (KeyValuePair<ESeason, bool> kvp in Seasons) if (kvp.Value) choosenSeasons.Add(kvp.Key);
+        Course = course;
+        RecipeDetails = recipeDetails;
+        IsUsed = true;
     }
 
     public bool IsSameRecipe(string name, string author)
     {
-        return this.name == name && this.author == author;
+        return Name == name && Author == author;
     }
 
     public bool IsSameRecipe(RecipeData recipe)
     {
-        return IsSameRecipe(recipe.Name, recipe.author);
+        return IsSameRecipe(recipe.Name, recipe.Author);
     }
 
     public bool MatchRequirement(Dictionary<ESeason, bool> seasons)
     {
-        foreach(KeyValuePair<ESeason, bool> season in seasons)
+        foreach (KeyValuePair<ESeason, bool> season in seasons)
         {
             if (season.Value && !Seasons[season.Key]) return false;
         }
@@ -61,8 +55,16 @@ public class RecipeData
 
     public void Modify(Dictionary<ESeason, bool> seasons = null, ECourse course = ECourse.Main, string recipeDetails = null)
     {
-        this.seasons = seasons ?? this.seasons;
-        this.course = course;
-        this.recipeDetails = recipeDetails ?? this.recipeDetails;
+        Seasons = seasons ?? Seasons;
+        foreach (KeyValuePair<ESeason, bool> kvp in Seasons)
+        {
+            if (kvp.Value)
+                choosenSeasons.Add(kvp.Key);
+            else
+                choosenSeasons.Remove(kvp.Key);
+        }
+
+        Course = course;
+        RecipeDetails = recipeDetails ?? RecipeDetails;
     }
 }
