@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class OptionManager : MonoBehaviour
 {
@@ -42,17 +41,17 @@ public class OptionManager : MonoBehaviour
 
     public void DefaultAppetizerValue(string value)
     {
-        playerOptions.nbAppetizer = Int32.Parse(value);
+        playerOptions.nbAppetizer = int.Parse(value);
     }
 
     public void DefaultMainValue(string value)
     {
-        playerOptions.nbMain = Int32.Parse(value);
+        playerOptions.nbMain = int.Parse(value);
     }
 
     public void DefaultDessertValue(string value)
     {
-        playerOptions.nbDessert = Int32.Parse(value);
+        playerOptions.nbDessert = int.Parse(value);
     }
 
     public void ChangeDirectory(string path)

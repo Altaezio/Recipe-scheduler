@@ -15,7 +15,10 @@ public class RecipesManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) Destroy(this);
         else Instance = this;
+    }
 
+    private void Start()
+    {
         RecipeDatas = InitialiseData();
     }
 
@@ -25,7 +28,7 @@ public class RecipesManager : MonoBehaviour
     /// <returns>The list filled with recipes</returns>
     public List<RecipeData> InitialiseData()
     {
-        return new List<RecipeData>();
+        return SaveSystem.LoadData();
     }
 
     /// <summary>

@@ -11,8 +11,9 @@ public class SaveSystem : MonoBehaviour
         List<RecipeData> recipes = RecipesManager.Instance.RecipeDatas;
         foreach(RecipeData recipe in recipes)
         {
-            string recipeJSON = JsonUtility.ToJson(recipe);
-            File.WriteAllText(path + recipe.Name + " - " + recipe.Author + ".json", recipeJSON);
+            string recipeJSON = JsonUtility.ToJson(recipe, true);
+            Debug.Log(recipeJSON);
+            File.WriteAllText(path + "/" + recipe.Name + " - " + recipe.Author + ".json", recipeJSON);
         }
     }
 

@@ -74,6 +74,7 @@ public class DisplayManager : MonoBehaviour
 
     public void Quit()
     {
+        SaveSystem.SaveData();
         Application.Quit();
     }
 }
